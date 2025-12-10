@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Precision Cuts NYC | Barber Shop in Greenwich Village</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Precision Cuts NYC offers clean fades, classic cuts, beard trims and shaves in the heart of Greenwich Village. Book your appointment online today.">
+  
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #050509;
+      --bg-alt: #0b0b11;
+      --accent: #f97316; /* warm orange */
+      --accent-soft: rgba(249,115,22,0.08);
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --border: #1f2933;
+      --card: #0f172a;
+      --radius-lg: 18px;
+      --radius-xl: 26px;
+      --shadow-soft: 0 18px 45px rgba(0,0,0,0.5);
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top left, #111827 0, #020617 45%);
+      color: var(--text);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* Layout helpers */
+    .page {
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    section {
+      padding: 4.5rem 0;
+    }
+
+    @media (min-width: 900px) {
+      section {
+        padding: 5.5rem 0;
+      }
+    }
+
+    /* Nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to bottom, rgba(2,6,23,0.92), rgba(2,6,23,0.8), transparent);
+      border-bottom: 1px solid rgba(148,163,184,0.1);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #f97316, #ef4444 40%, #020617 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .nav-title {
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      position: relative;
+      padding-bottom: 0.1rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.2rem;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #f97316, #fb923c);
+      transition: width 0.2s ease-out;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      display: none;
+    }
+
+    @media (min-width: 800px) {
+      .nav-links {
+        display: flex;
+      }
+      .nav-cta {
+        display: flex;
+      }
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.9rem;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: background 0.18s ease-out, border-color 0.18s ease-out, transform 0.12s ease-out;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, #f97316, #fb923c);
+      color: #111827;
+      font-weight: 600;
+      box-shadow: 0 14px 30px rgba(249,115,22,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 40px rgba(249,115,22,0.45);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: rgba(148,163,184,0.4);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      background: rgba(15,23,42,0.85);
+      border-color: rgba(148,163,184,0.7);
+    }
+
+    .btn-pill-soft {
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.3);
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .btn-pill-soft span.badge {
+      display: inline-flex;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.72rem;
+    }
+
+    /* Hero */
+    .hero {
+      padding-top: 3.25rem;
+      padding-bottom: 3.5rem;
+    }
+
+    @media (min-width: 900px) {
+      .hero {
+        padding-top: 4rem;
+        padding-bottom: 4.5rem;
+      }
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 2.8rem;
+    }
+
+    @media (min-width: 900px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        align-items: center;
+      }
+    }
+
+    .hero-eyebrow {
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-title {
+      font-size: 2.3rem;
+      line-height: 1.15;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.9rem;
+    }
+
+    @media (min-width: 600px) {
+      .hero-title {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .hero-title {
+        font-size: 3.1rem;
+      }
+    }
+
+    .hero-highlight {
+      background: linear-gradient(to right, #f97316, #eab308);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      color: var(--muted);
+      max-width: 460px;
+      font-size: 0.98rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .hero-meta strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .hero-card {
+      background: radial-gradient(circle at top, rgba(15,23,42,1) 0, rgba(15,23,42,0.95) 30%, rgba(15,23,42,0.96) 100%);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148,163,184,0.18);
+      box-shadow: var(--shadow-soft);
+      padding: 1.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (min-width: 900px) {
+      .hero-card {
+        padding: 1.6rem;
+      }
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -30%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(249,115,22,0.16), transparent 55%),
+        radial-gradient(circle at 90% 100%, rgba(96,165,250,0.18), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-pills {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+    }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(22,163,74,0.09);
+      border: 1px solid rgba(34,197,94,0.35);
+      color: #bbf7d0;
+      font-size: 0.78rem;
+    }
+
+    .hero-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34,197,94,0.35);
+    }
+
+    .hero-badge {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-card-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .hero-card-group {
+      padding: 0.7rem 0.8rem;
+      border-radius: 0.85rem;
+      border: 1px solid rgba(148,163,184,0.25);
+      background: rgba(15,23,42,0.85);
+    }
+
+    .hero-card-label {
+      display: block;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+      color: rgba(148,163,184,0.8);
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-card-value {
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.3rem;
+    }
+
+    .hero-card-footer small {
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .hero-mini {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-mini-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    /* Sections */
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      font-size: 0.9rem;
+      max-width: 420px;
+      margin-bottom: 1.8rem;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 700px) {
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .service-card {
+      border-radius: var(--radius-lg);
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.25);
+      padding: 1rem 1.05rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, border-color 0.12s ease-out, background 0.12s ease-out;
+    }
+
+    .service-card:hover {
+      transform: translateY(-1px);
+      border-color: rgba(249,115,22,0.55);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.65);
+      background: rgba(15,23,42,0.98);
+    }
+
+    .service-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: baseline;
+    }
+
+    .service-name {
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+
+    .service-price {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--accent);
+    }
+
+    .service-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .service-footer {
+      margin-top: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      gap: 0.75rem;
+    }
+
+    .service-book-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .service-book-link svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    /* About / Split section */
+    .split-grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    @media (min-width: 850px) {
+      .split-grid {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        align-items: flex-start;
+      }
+    }
+
+    .about-card,
+    .hours-card {
+      background: rgba(15,23,42,0.9);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148,163,184,0.25);
+      padding: 1.4rem 1.3rem;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+    }
+
+    .about-text {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .about-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0.35rem;
+      font-size: 0.83rem;
+      color: var(--muted);
+    }
+
+    .about-list li::before {
+      content: "•";
+      color: var(--accent);
+      margin-right: 0.4rem;
+    }
+
+    .about-tagline {
+      font-size: 0.85rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.7rem;
+    }
+
+    /* Hours & location */
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 1.05rem;
+    }
+
+    .hours-table tr td {
+      padding: 0.2rem 0;
+    }
+
+    .hours-table tr td:first-child {
+      width: 40%;
+      color: #e5e7eb;
+    }
+
+    .hours-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(22,163,74,0.09);
+      border: 1px solid rgba(34,197,94,0.4);
+      font-size: 0.75rem;
+      color: #bbf7d0;
+      margin-bottom: 0.7rem;
+    }
+
+    .hours-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .location-line {
+      font-size: 0.86rem;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .location-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .map-link {
+      font-size: 0.8rem;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .map-link svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      gap: 1.8rem;
+    }
+
+    @media (min-width: 800px) {
+      .contact-grid {
+        grid-template-columns: 1.1fr 1fr;
+      }
+    }
+
+    .contact-card {
+      background: rgba(15,23,42,0.9);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148,163,184,0.25);
+      padding: 1.3rem 1.25rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: baseline;
+      gap: 0.85rem;
+      font-size: 0.86rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .contact-label {
+      min-width: 70px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.72rem;
+      color: rgba(148,163,184,0.85);
+    }
+
+    .contact-value a {
+      color: var(--text);
+    }
+
+    .contact-value a:hover {
+      text-decoration: underline;
+      text-decoration-color: rgba(249,115,22,0.7);
+    }
+
+    .policy-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.7rem;
+      border-top: 1px dashed rgba(148,163,184,0.3);
+      padding-top: 0.6rem;
+    }
+
+    /* Simple form (non-functional placeholder) */
+    .contact-form {
+      display: grid;
+      gap: 0.7rem;
+      font-size: 0.85rem;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .field label {
+      font-size: 0.78rem;
+      color: rgba(148,163,184,0.9);
+    }
+
+    .field input,
+    .field textarea {
+      border-radius: 0.9rem;
+      border: 1px solid rgba(148,163,184,0.35);
+      padding: 0.6rem 0.8rem;
+      background: rgba(15,23,42,0.9);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field textarea:focus {
+      border-color: rgba(249,115,22,0.8);
+      box-shadow: 0 0 0 1px rgba(249,115,22,0.6);
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-hint {
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(31,41,55,1);
+      padding: 1.4rem 0 1.8rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2.1rem;
+      }
+      .hero-subtitle {
+        font-size: 0.9rem;
+      }
+      .hero-card-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="nav-mark">PC</div>
+        <div>
+          <div class="nav-title">Precision Cuts NYC</div>
+          <div style="font-size:0.7rem;color:#9ca3af;">Greenwich Village Barbershop</div>
+        </div>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#hours">Hours</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+          Book now
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- HERO -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="btn-pill-soft">
+              <span class="badge">New York, NY</span>
+              Walk-ins welcome • Appointments preferred
+            </div>
+
+            <div class="hero-eyebrow">Barber shop • Thompson Street</div>
+
+            <h1 class="hero-title">
+              Clean fades, sharp lines,<br />
+              <span class="hero-highlight">Precision every time.</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              Precision Cuts NYC is your neighborhood barbershop in the heart of Greenwich Village —
+              classic cuts, modern fades, beard trims and hot shaves, all done right the first time.
+            </p>
+
+            <div class="hero-ctas">
+              <a class="btn btn-primary" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book appointment
+              </a>
+              <a class="btn btn-outline" href="tel:+19174009628">
+                Call (917) 400-9628
+              </a>
+            </div>
+
+            <div class="hero-meta">
+              <div><strong>Mon–Fri:</strong> 9am–7pm (Fri until 4pm)</div>
+              <div><strong>Sun:</strong> 10am–5pm</div>
+              <div><strong>Sat:</strong> Closed</div>
+            </div>
+          </div>
+
+          <aside aria-label="Shop snapshot" class="hero-card">
+            <div class="hero-card-inner">
+              <div class="hero-pills">
+                <div class="hero-status">
+                  <span class="hero-status-dot"></span>
+                  Open today
+                </div>
+                <div class="hero-badge">
+                  231 Thompson St · NY 10012
+                </div>
+              </div>
+
+              <div class="hero-card-row">
+                <div class="hero-card-group">
+                  <span class="hero-card-label">Today</span>
+                  <span class="hero-card-value">Sun · 10am – 5pm</span>
+                  <span style="font-size:0.78rem;color:var(--muted);">
+                    Walk-ins welcome when we have space.
+                  </span>
+                </div>
+                <div class="hero-card-group">
+                  <span class="hero-card-label">Most booked</span>
+                  <span class="hero-card-value">Haircut &amp; beard trim · $60</span>
+                  <span style="font-size:0.78rem;color:var(--muted);">
+                    Regular hours · Mon–Thu 9am–7pm.
+                  </span>
+                </div>
+              </div>
+
+              <div class="hero-card-footer">
+                <small>Book online in under 30 seconds via Setmore.</small>
+                <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                  View booking page
+                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+
+              <div class="hero-mini" style="margin-top:1rem;">
+                <div class="hero-mini-row">
+                  <span>• Cash & card accepted</span>
+                  <span>• All ages welcome</span>
+                </div>
+                <div class="hero-mini-row">
+                  <span>• Appointments recommended</span>
+                  <span>• Beard trims & shaves</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">Services &amp; pricing</h2>
+        <p class="section-subtitle">
+          The same services and prices you see on our online booking page — now easier to browse.
+          Tap any service to book instantly.
+        </p>
+
+        <div class="services-grid" aria-label="Services list">
+          <!-- Each service card mirrors the Setmore services -->
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Haircut · Regular hours (9am–7pm)</h3>
+              <div class="service-price">$40</div>
+            </div>
+            <p class="service-desc">
+              Classic or modern cut, styled and finished — available during regular hours.
+            </p>
+            <div class="service-footer">
+              <span>Approx. 30–40 min</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Haircut · Before 9am / After 7pm</h3>
+              <div class="service-price">$60</div>
+            </div>
+            <p class="service-desc">
+              Early or late appointments outside regular hours for extra flexibility.
+            </p>
+            <div class="service-footer">
+              <span>Off-hours service</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Haircut &amp; beard trim</h3>
+              <div class="service-price">$60</div>
+            </div>
+            <p class="service-desc">
+              Fresh cut plus a clean beard line-up or full trim.
+            </p>
+            <div class="service-footer">
+              <span>Most popular combo</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Beard trim</h3>
+              <div class="service-price">$20</div>
+            </div>
+            <p class="service-desc">
+              Shape-up, clean edges, and length maintenance for your beard.
+            </p>
+            <div class="service-footer">
+              <span>Quick service</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Head razor shave</h3>
+              <div class="service-price">$50</div>
+            </div>
+            <p class="service-desc">
+              Smooth, clean razor shave for your head with close detail work.
+            </p>
+            <div class="service-footer">
+              <span>Razor finish</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Haircut &amp; shave</h3>
+              <div class="service-price">$80</div>
+            </div>
+            <p class="service-desc">
+              Full service: fresh haircut plus a classic shave for a complete reset.
+            </p>
+            <div class="service-footer">
+              <span>Premium service</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Regular shave</h3>
+              <div class="service-price">$40</div>
+            </div>
+            <p class="service-desc">
+              Traditional shave service with attention to detail and clean lines.
+            </p>
+            <div class="service-footer">
+              <span>Face shave</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Royal shave</h3>
+              <div class="service-price">$50</div>
+            </div>
+            <p class="service-desc">
+              A little extra time and detail for an upgraded shave experience.
+            </p>
+            <div class="service-footer">
+              <span>Deluxe shave</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Kids haircut</h3>
+              <div class="service-price">$40</div>
+            </div>
+            <p class="service-desc">
+              Patient, friendly cuts for kids — clean styles for all ages.
+            </p>
+            <div class="service-footer">
+              <span>All ages welcome</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Buzz cut</h3>
+              <div class="service-price">$35</div>
+            </div>
+            <p class="service-desc">
+              One guard all the way around for a simple, low-maintenance cut.
+            </p>
+            <div class="service-footer">
+              <span>Quick & easy</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Buzz cut &amp; beard trim</h3>
+              <div class="service-price">$55</div>
+            </div>
+            <p class="service-desc">
+              Simple buzz cut paired with a clean beard trim and line-up.
+            </p>
+            <div class="service-footer">
+              <span>Low-maintenance combo</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-header">
+              <h3 class="service-name">Facial</h3>
+              <div class="service-price">$50</div>
+            </div>
+            <p class="service-desc">
+              Relaxing facial treatment to refresh your skin and finish your visit strong.
+            </p>
+            <div class="service-footer">
+              <span>Add-on or standalone</span>
+              <a class="service-book-link" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                Book
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT + HOURS / LOCATION -->
+    <section id="about">
+      <div class="container">
+        <div class="split-grid">
+          <div>
+            <h2 class="section-title">About Precision Cuts NYC</h2>
+            <p class="section-subtitle">
+              A neighborhood barbershop focused on precise, consistent cuts and a straightforward, no-nonsense experience.
+            </p>
+
+            <div class="about-card">
+              <div class="about-tagline">
+                “Precision Cuts guarantees high-quality services for all your grooming needs.”
+              </div>
+              <p class="about-text">
+                We keep it simple: sharp haircuts, clean shaves, and friendly service. Whether you need a full
+                transformation or just a quick clean-up before class, work, or a night out, we’ve got you.
+              </p>
+              <ul class="about-list">
+                <li>Clean fades, tapers, and classic cuts</li>
+                <li>Beard trims, razor shaves, and facials</li>
+                <li>Kids, students, locals, and visitors all welcome</li>
+                <li>Easy online booking with clear pricing</li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="hours">
+            <h2 class="section-title">Hours &amp; location</h2>
+            <p class="section-subtitle">
+              Open most days — just a few steps off Washington Square Park on Thompson Street.
+            </p>
+
+            <div class="hours-card">
+              <div class="hours-chip">
+                <span class="hours-dot"></span>
+                Open today · see hours below
+              </div>
+
+              <table class="hours-table" aria-label="Opening hours">
+                <tbody>
+                  <tr>
+                    <td>Sunday</td>
+                    <td>10:00 AM – 5:00 PM</td>
+                  </tr>
+                  <tr>
+                    <td>Monday</td>
+                    <td>9:00 AM – 7:00 PM</td>
+                  </tr>
+                  <tr>
+                    <td>Tuesday</td>
+                    <td>9:00 AM – 7:00 PM</td>
+                  </tr>
+                  <tr>
+                    <td>Wednesday</td>
+                    <td>9:00 AM – 7:00 PM</td>
+                  </tr>
+                  <tr>
+                    <td>Thursday</td>
+                    <td>9:00 AM – 7:00 PM</td>
+                  </tr>
+                  <tr>
+                    <td>Friday</td>
+                    <td>9:00 AM – 4:00 PM</td>
+                  </tr>
+                  <tr>
+                    <td>Saturday</td>
+                    <td>Closed</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="location-line">
+                231 Thompson St, New York, NY 10012
+              </div>
+              <div class="location-sub">
+                Just off Washington Square Park in Greenwich Village.
+              </div>
+
+              <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=231+Thompson+St+New+York+NY+10012" target="_blank" rel="noopener noreferrer">
+                Open in Google Maps
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 15L15 5M8 5H15V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+        <h2 class="section-title">Contact &amp; booking</h2>
+        <p class="section-subtitle">
+          The fastest way to lock in a time is through our online booking page, but you can also call or email.
+        </p>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-item">
+              <div class="contact-label">Phone</div>
+              <div class="contact-value">
+                <a href="tel:+19174009628">(917) 400-9628</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:precisioncuts212@gmail.com">precisioncuts212@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Address</div>
+              <div class="contact-value">
+                231 Thompson St<br />
+                New York, NY 10012
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-label">Booking</div>
+              <div class="contact-value">
+                <a href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+                  Book online via Setmore
+                </a>
+              </div>
+            </div>
+
+            <p class="policy-note">
+              Please arrive 5 minutes before your appointment. If you miss your appointment or don’t cancel
+              at least 1 hour in advance, you may be charged the full service amount.
+            </p>
+          </div>
+
+          <div class="contact-card">
+            <form class="contact-form">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" type="text" name="name" placeholder="Your name" />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" placeholder="you@example.com" />
+              </div>
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Questions, special requests, or feedback"></textarea>
+              </div>
+              <button type="button" class="btn btn-outline">
+                Send (add your own handler)
+              </button>
+              <p class="form-hint">
+                This form is just a template — connect it to your email provider or a service like Formspree
+                if you want it to send messages directly.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        © <span id="year"></span> Precision Cuts NYC. All rights reserved.
+      </div>
+      <div class="footer-links">
+        <a href="#home">Back to top</a>
+        <a href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+          Book now
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Update footer year automatically
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
