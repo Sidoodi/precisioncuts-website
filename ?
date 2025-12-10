@@ -1,0 +1,292 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/precisioncuts-website b/precisioncuts-website
+index 0b4442f26b3d0354f4ecf0f5f4f6f83587076f5b..2ea5bb3fec36cc7c6a7a130db0930133506d9f84 100644
+--- a/precisioncuts-website
++++ b/precisioncuts-website
+@@ -65,50 +65,51 @@
+     }
+ 
+     @media (min-width: 900px) {
+       section {
+         padding: 5.5rem 0;
+       }
+     }
+ 
+     /* Nav */
+     .nav {
+       position: sticky;
+       top: 0;
+       z-index: 40;
+       backdrop-filter: blur(16px);
+       background: linear-gradient(to bottom, rgba(2,6,23,0.92), rgba(2,6,23,0.8), transparent);
+       border-bottom: 1px solid rgba(148,163,184,0.1);
+     }
+ 
+     .nav-inner {
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       max-width: var(--max-width);
+       margin: 0 auto;
+       padding: 0.75rem 1.25rem;
++      position: relative;
+     }
+ 
+     .nav-logo {
+       display: flex;
+       align-items: center;
+       gap: 0.75rem;
+     }
+ 
+     .nav-mark {
+       width: 36px;
+       height: 36px;
+       border-radius: 999px;
+       background: radial-gradient(circle at 30% 0, #f97316, #ef4444 40%, #020617 100%);
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       font-weight: 700;
+       font-size: 1.05rem;
+     }
+ 
+     .nav-title {
+       font-weight: 600;
+       letter-spacing: 0.06em;
+       font-size: 0.95rem;
+       text-transform: uppercase;
+@@ -128,57 +129,116 @@
+     }
+ 
+     .nav-links a:hover {
+       color: var(--text);
+     }
+ 
+     .nav-links a::after {
+       content: "";
+       position: absolute;
+       left: 0;
+       bottom: -0.2rem;
+       width: 0;
+       height: 2px;
+       background: linear-gradient(to right, #f97316, #fb923c);
+       transition: width 0.2s ease-out;
+     }
+ 
+     .nav-links a:hover::after {
+       width: 100%;
+     }
+ 
+     .nav-cta {
+       display: none;
+     }
+ 
++    .nav-toggle {
++      display: inline-flex;
++      align-items: center;
++      justify-content: center;
++      gap: 0.25rem;
++      padding: 0.5rem 0.7rem;
++      border-radius: 999px;
++      border: 1px solid rgba(148,163,184,0.35);
++      background: rgba(15,23,42,0.85);
++      color: var(--text);
++      cursor: pointer;
++      font-size: 0.9rem;
++      transition: border-color 0.16s ease-out, background 0.16s ease-out, transform 0.12s ease-out;
++    }
++
++    .nav-toggle:hover {
++      border-color: rgba(249,115,22,0.6);
++      background: rgba(15,23,42,0.95);
++      transform: translateY(-1px);
++    }
++
++    .nav-toggle svg {
++      width: 18px;
++      height: 18px;
++    }
++
++    .nav-links.is-open {
++      display: flex;
++      flex-direction: column;
++      align-items: flex-start;
++      gap: 0.85rem;
++      position: absolute;
++      left: 1.25rem;
++      right: 1.25rem;
++      top: calc(100% + 0.5rem);
++      padding: 0.9rem 1rem;
++      background: rgba(15,23,42,0.96);
++      border-radius: var(--radius-lg);
++      border: 1px solid rgba(148,163,184,0.25);
++      box-shadow: 0 18px 30px rgba(0,0,0,0.55);
++      z-index: 10;
++    }
++
++    .nav-links.is-open a {
++      width: 100%;
++      padding: 0.15rem 0;
++    }
++
+     @media (min-width: 800px) {
+       .nav-links {
+         display: flex;
+       }
+       .nav-cta {
+         display: flex;
+       }
++      .nav-toggle {
++        display: none;
++      }
++      .nav-links {
++        position: static;
++        flex-direction: row;
++        background: transparent;
++        padding: 0;
++        box-shadow: none;
++        border: none;
++      }
+     }
+ 
+     .btn {
+       border-radius: 999px;
+       padding: 0.65rem 1.4rem;
+       font-size: 0.9rem;
+       border: 1px solid transparent;
+       display: inline-flex;
+       align-items: center;
+       justify-content: center;
+       gap: 0.4rem;
+       cursor: pointer;
+       transition: background 0.18s ease-out, border-color 0.18s ease-out, transform 0.12s ease-out;
+       text-decoration: none;
+     }
+ 
+     .btn-primary {
+       background: linear-gradient(to right, #f97316, #fb923c);
+       color: #111827;
+       font-weight: 600;
+       box-shadow: 0 14px 30px rgba(249,115,22,0.35);
+     }
+ 
+     .btn-primary:hover {
+       transform: translateY(-1px);
+@@ -765,57 +825,64 @@
+     @media (max-width: 480px) {
+       .hero-title {
+         font-size: 2.1rem;
+       }
+       .hero-subtitle {
+         font-size: 0.9rem;
+       }
+       .hero-card-row {
+         grid-template-columns: 1fr;
+       }
+     }
+   </style>
+ </head>
+ 
+ <body>
+   <header class="nav">
+     <div class="nav-inner">
+       <div class="nav-logo">
+         <div class="nav-mark">PC</div>
+         <div>
+           <div class="nav-title">Precision Cuts NYC</div>
+           <div style="font-size:0.7rem;color:#9ca3af;">Greenwich Village Barbershop</div>
+         </div>
+       </div>
+ 
+-      <nav class="nav-links" aria-label="Main navigation">
++      <nav id="nav-links" class="nav-links" aria-label="Main navigation">
+         <a href="#services">Services</a>
+         <a href="#about">About</a>
+         <a href="#hours">Hours</a>
+         <a href="#contact">Contact</a>
+       </nav>
+ 
++      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
++        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
++          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
++        </svg>
++        Menu
++      </button>
++
+       <div class="nav-cta">
+         <a class="btn btn-primary" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+           Book now
+         </a>
+       </div>
+     </div>
+   </header>
+ 
+   <main class="page">
+     <!-- HERO -->
+     <section id="home" class="hero">
+       <div class="container">
+         <div class="hero-grid">
+           <div>
+             <div class="btn-pill-soft">
+               <span class="badge">New York, NY</span>
+               Walk-ins welcome • Appointments preferred
+             </div>
+ 
+             <div class="hero-eyebrow">Barber shop • Thompson Street</div>
+ 
+             <h1 class="hero-title">
+               Clean fades, sharp lines,<br />
+               <span class="hero-highlight">Precision every time.</span>
+             </h1>
+@@ -1299,28 +1366,48 @@
+               </p>
+             </form>
+           </div>
+         </div>
+       </div>
+     </section>
+   </main>
+ 
+   <footer>
+     <div class="footer-inner">
+       <div>
+         © <span id="year"></span> Precision Cuts NYC. All rights reserved.
+       </div>
+       <div class="footer-links">
+         <a href="#home">Back to top</a>
+         <a href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
+           Book now
+         </a>
+       </div>
+     </div>
+   </footer>
+ 
+   <script>
+     // Update footer year automatically
+     document.getElementById('year').textContent = new Date().getFullYear();
++
++    // Mobile navigation toggle
++    const navToggle = document.querySelector('.nav-toggle');
++    const navLinks = document.getElementById('nav-links');
++
++    if (navToggle && navLinks) {
++      const toggleMenu = () => {
++        const isOpen = navLinks.classList.toggle('is-open');
++        navToggle.setAttribute('aria-expanded', String(isOpen));
++      };
++
++      navToggle.addEventListener('click', toggleMenu);
++
++      navLinks.querySelectorAll('a').forEach((link) => {
++        link.addEventListener('click', () => {
++          navLinks.classList.remove('is-open');
++          navToggle.setAttribute('aria-expanded', 'false');
++        });
++      });
++    }
+   </script>
+ </body>
+ </html>
+ 
+EOF
+)
