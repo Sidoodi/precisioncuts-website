@@ -87,6 +87,7 @@
       max-width: var(--max-width);
       margin: 0 auto;
       padding: 0.75rem 1.25rem;
+      position: relative;
     }
 
     .nav-logo {
@@ -150,12 +151,71 @@
       display: none;
     }
 
+    .nav-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      padding: 0.5rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.35);
+      background: rgba(15,23,42,0.85);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: border-color 0.16s ease-out, background 0.16s ease-out, transform 0.12s ease-out;
+    }
+
+    .nav-toggle:hover {
+      border-color: rgba(249,115,22,0.6);
+      background: rgba(15,23,42,0.95);
+      transform: translateY(-1px);
+    }
+
+    .nav-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .nav-links.is-open {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.85rem;
+      position: absolute;
+      left: 1.25rem;
+      right: 1.25rem;
+      top: calc(100% + 0.5rem);
+      padding: 0.9rem 1rem;
+      background: rgba(15,23,42,0.96);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148,163,184,0.25);
+      box-shadow: 0 18px 30px rgba(0,0,0,0.55);
+      z-index: 10;
+    }
+
+    .nav-links.is-open a {
+      width: 100%;
+      padding: 0.15rem 0;
+    }
+
     @media (min-width: 800px) {
       .nav-links {
         display: flex;
       }
       .nav-cta {
         display: flex;
+      }
+      .nav-toggle {
+        display: none;
+      }
+      .nav-links {
+        position: static;
+        flex-direction: row;
+        background: transparent;
+        padding: 0;
+        box-shadow: none;
+        border: none;
       }
     }
 
@@ -787,12 +847,19 @@
         </div>
       </div>
 
-      <nav class="nav-links" aria-label="Main navigation">
+      <nav id="nav-links" class="nav-links" aria-label="Main navigation">
         <a href="#services">Services</a>
         <a href="#about">About</a>
         <a href="#hours">Hours</a>
         <a href="#contact">Contact</a>
       </nav>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        Menu
+      </button>
 
       <div class="nav-cta">
         <a class="btn btn-primary" href="https://precisioncutsnyc.setmore.com/" target="_blank" rel="noopener noreferrer">
@@ -1321,6 +1388,26 @@
   <script>
     // Update footer year automatically
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile navigation toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    if (navToggle && navLinks) {
+      const toggleMenu = () => {
+        const isOpen = navLinks.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      };
+
+      navToggle.addEventListener('click', toggleMenu);
+
+      navLinks.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('is-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
   </script>
 </body>
 </html>
